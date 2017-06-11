@@ -8,7 +8,6 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import org.apache.log4j.Logger;
 
@@ -16,17 +15,17 @@ import org.apache.log4j.Logger;
  * Created by emrahsoytekin on 03/06/2017.
  */
 public class SqlProxyServer {
-    private int localPort;
-    private int remotePort;
-    private String remoteHost;
+    private final int localPort;
+    private final int remotePort;
+    private final String remoteHost;
 
-    public SqlProxyServer(int localPort, String remoteHost, int remotePort){
+    private SqlProxyServer(int localPort, String remoteHost, int remotePort){
         this.localPort = localPort;
         this.remoteHost = remoteHost;
         this.remotePort = remotePort;
     }
     private static final Logger logger = Logger.getLogger (SqlProxyServer.class);
-    public void run() throws InterruptedException {
+    private void run() throws InterruptedException {
         EventLoopGroup bossGroup = new NioEventLoopGroup ();
         EventLoopGroup workerGroup = new NioEventLoopGroup ();
 
